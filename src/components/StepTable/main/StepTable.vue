@@ -2,7 +2,7 @@
   <div>
         <div class="wizard-navigation">
             <div class="nav-content" v-for='(item,idx) in arr'  :key='idx'>{{item}}</div>
-            <div class="move-nav" :style='{left:left+"px"}'>{{arr[isActive-1]}}</div>
+            <div class="move-nav" :style='{left:left+"px"}' >{{arr[isActive-1]}}</div>
         </div>
         <div class="wizard-content">
             <div v-if='isActive==1' class="first-step">
@@ -85,6 +85,7 @@
                             id="material" 
                             @blur='changeLabel2("material")' 
                             @click='changeLabel("material")'>
+										      <option disabled="disabled" selected="selected"></option>
 													<option value="铁">铁</option>
 													<option value="碳钢">碳钢</option>
 													<option value="不锈钢">不锈钢</option>
@@ -102,6 +103,7 @@
                             v-model="shape.value"
                             @click='changeLabel("shape")' 
                             @blur='changeLabel2("shape")' >
+									      	<option disabled="disabled" selected="selected"></option>
 													<option value="长方形">长方形</option>
 													<option value="正方形">正方形</option>
 													<option value="菱形">菱形</option>
@@ -118,7 +120,7 @@
 													<label :class="['control-label',thickness.isFocus?'' :'noActive']" id="thicknessLabel">*板厚（管直径及壁厚/mm）
 														<span id="thicknessError" :class="['errorSpan',thickness.thicknessValueEmpty?'':'hidden']">该项不能为空</span>
 													</label>
-													<input type="number" class="form-control" id="thickness" v-model="thickness.value" @click='changeLabel("thickness")' @blur='changeLabel2("thickness")'>
+													<input type="text" class="form-control" id="thickness" v-model="thickness.value" @click='changeLabel("thickness")' @blur='changeLabel2("thickness")'>
                           <div class="line"></div>
 												</div>
 											</div>
@@ -127,6 +129,7 @@
 											<div class="form-group label-floating">
 												<label :class="['control-label',connector.isFocus?'' :'noActive']">接头形式</label>
 												<select class="form-control" v-model="connector.value" @click='changeLabel("connector")' @blur='changeLabel2("connector")'>
+										      <option disabled="disabled" selected="selected"></option>
 													<option value="塔接">塔接</option>
 													<option value="对接">对接</option>
 													<option value="角接">角接</option>
@@ -139,7 +142,7 @@
 										<div>
 											<div class="form-group label-floating">
 												<label :class="['control-label',weldingSize.isFocus?'' :'noActive']">焊接尺寸（mm）</label>
-												<input type="number" class="form-control" id="weldingSize" v-model="weldingSize.value" @click="changeLabel('weldingSize')" @blur='changeLabel2("weldingSize")' />
+												<input type="text" class="form-control" id="weldingSize" v-model="weldingSize.value" @click="changeLabel('weldingSize')" @blur='changeLabel2("weldingSize")' />
                         <div class="line"></div>
 											</div>
 										</div>
@@ -149,6 +152,7 @@
                 <li>
                   <label class="control-label">飞溅</label>
                   <select class="form-control valid" aria-invalid="false" v-model='splash'>
+										<option disabled="disabled" selected="selected"></option>
                     <option value="少">少</option> 
                     <option value="中">中</option> 
                     <option value="多">多</option> 
@@ -159,6 +163,7 @@
                 <li>
                   <label class="control-label">焊缝质量</label>
                   <select class="form-control valid" aria-invalid="false" v-model='weld'>
+										<option disabled="disabled" selected="selected"></option>
                     <option value="低">低</option> 
                     <option value="中">中</option> 
                     <option value="高">高</option> 
@@ -169,6 +174,7 @@
                 <li >
                   <label class="control-label">外观要求</label>
                   <select class="form-control valid" aria-invalid="false" v-model='appearance'>
+										<option disabled="disabled" selected="selected"></option>
                     <option value="低">低</option> 
                     <option value="中">中</option> 
                     <option value="高">高</option> 
@@ -179,6 +185,7 @@
                 <li>
                   <label class="control-label">精度要求</label>
                   <select class="form-control valid" aria-invalid="false" v-model='accuracy'>
+										<option disabled="disabled" selected="selected"></option>
                     <option value="低">低</option> 
                     <option value="中">中</option> 
                     <option value="高">高</option> 
@@ -296,6 +303,8 @@ export default {
     isActive: function() {
       if (this.isActive > 3) {
         this.msg = "提交";
+      } else {
+        this.msg = "下一步";
       }
     },
     chooseIdx: function(val) {
@@ -313,8 +322,19 @@ export default {
     },
     thickness: {
       handler: function(val) {
-        if (val.value !== "") {
+        if (val.value !== "" ) {
           val.thicknessValueEmpty = false;
+        }
+        if(!(/^[0-9.]*$/.test(val.value))){
+          val.value=''
+        }
+      },
+      deep: true
+    },
+    weldingSize:{
+       handler: function(val) {
+        if(!(/^[0-9.]*$/.test(val.value))){
+          val.value=''
         }
       },
       deep: true
@@ -350,11 +370,10 @@ export default {
           this.thickness.thicknessValueEmpty = false;
           this.isActive += step;
           this.left += 263 * step;
-          this.msg = "下一步";
         }
       }
       // 提交
-      if (this.msg =='提交') {
+      if (this.msg == "提交" && step>0) {
         this.$alert("这是一段内容", "标题名称", {
           confirmButtonText: "确定",
           callback: action => {
@@ -377,7 +396,7 @@ export default {
           center: false,
           dangerouslyUseHTMLString: true
         }).then(action => {
-           window.location = 'http://dect.robo2025.com/';
+          window.location = "http://dect.robo2025.com/";
         });
       }
     },
@@ -461,6 +480,9 @@ p {
   select.form-control:focus {
     box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.25);
   }
+  select:focus + .line {
+    width: 400px;
+  }
   input.form-control:focus {
     box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.25);
   }
@@ -474,9 +496,6 @@ p {
     left: 0px;
     right: 0px;
     transition: width 0.2s linear;
-  }
-  .form-group:focus .line {
-    width: 389px;
   }
   li {
     float: left;
@@ -596,7 +615,6 @@ p {
     .line {
       top: 43px;
     }
-    // select
     label.noActive {
       top: 0 !important;
       font-size: 14px !important;
@@ -607,24 +625,20 @@ p {
     input + .line {
       top: 45px;
     }
-    select:focus + .line {
-      width: 397px;
-    }
     input:focus + .line {
-      width: 397px;
-    }
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-      -webkit-appearance: none !important;
-    }
-    input[type="number"] {
-      -moz-appearance: textfield;
+      width: 400px;
     }
   }
   .third-step {
     width: 100%;
     height: 100%;
     padding: 0 85px;
+    .line {
+      top: 72px;
+    }
+    select:focus + .line {
+      width: 396px;
+    }
   }
   .fourth-step {
     width: 100%;
@@ -662,7 +676,6 @@ p {
     float: right;
   }
 }
-
 </style>
 
 
