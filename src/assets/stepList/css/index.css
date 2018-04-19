@@ -1,0 +1,95 @@
+body {
+    background-color: #ffffff;
+    font-weight: normal;
+}
+
+.wizard-card {
+    min-height: 650px;
+    margin-bottom: 28%;
+    /* margin-top: -8%; */
+}
+
+.thickness {
+    margin-top: -4px;
+}
+
+.wizard-card .title {
+    margin-bottom: 10px;
+    border-bottom-color: #3284d8;
+}
+
+.wizard-card .choice .icon {
+    width: 64px;
+    height: 64px;
+}
+
+.wizard-card .choice i {
+    font-size: 26px;
+    line-height: 60px;
+}
+
+/* .verticalLine {
+    border: 5px;
+    border-left: dashed #f5f5f5;
+    margin-left: 48%;
+    margin-top: -20%;
+    height: 30%;
+    position: absolute;
+} */
+
+.wizard-card .choice .scence-icon {
+    width: 170px;
+    height: 45px;
+    border-radius: 0%;
+}
+
+.wizard-card .tab-content {
+    padding: 30px 15px;
+}
+
+.form-group .form-control {
+    margin-bottom: 20px;
+}
+
+h5 {
+    line-height: 3;
+}
+
+h5:hover, .hActive, h4 {
+    color: #3284d8;
+}
+
+.hidden {
+    display: none;
+}
+
+#thicknessLabel span {
+    color: red;
+}
+
+#fourthStep .title {
+    display: block;
+    margin-bottom: 26px;
+}
+
+#fourthStep i {
+    float: left;
+    margin-right: 10px;
+}
+
+#fourthStep label {
+    color: #212529;
+    font-weight: 700;
+}
+
+.errorSpan {
+    color: red;
+}
+
+.form-label {
+    margin-bottom: 10px;
+}
+
+select.form-control:not([size]):not([multiple]) {
+    height: calc(2.25rem + 8px);
+}

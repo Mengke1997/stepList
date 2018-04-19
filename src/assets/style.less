@@ -1,0 +1,89 @@
+html {
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%; 
+}
+body {
+    margin: 0; 
+    padding: 0;
+}
+article,
+aside,
+footer,
+header,
+nav,
+section {
+    display: block; 
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.clearfix:before,.clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.clearfix {
+    zoom: 1;
+}
+html {
+    font-size: 16px;
+}
+.container {
+    padding: 0;
+    margin: 0 auto;
+    width: 1200px;
+    min-width: 1200px;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+ul,ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+a {
+    text-decoration: none;
+}
+@baseColor: #0275d8;
+input::-webkit-input-placeholder {  /* WebKit browsers */
+    font-size: 14px;
+}
+input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    font-size: 14px;
+}
+input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    font-size: 14px;
+}
+input :-ms-input-placeholder { /* Internet Explorer 10+ */
+    font-size: 14px;
+}
+span:focus,button:focus {
+    outline: none;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Roboto Condensed", Helvetica, Arial, sans-serif;
+    font-weight: normal;
+}
+img {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+
+// 弹出层css
+.warn-box{
+    text-align: center;
+}
+.warn-box .warn-img-box{
+    width: 88px;
+    height: 88px;
+    background-image: url('../assets/stepList/images/info.png');
+    background-size:100%;
+    margin:60px auto 0;
+}
+.warn-box p{
+    padding-bottom:20px;
+}
